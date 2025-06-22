@@ -1,0 +1,48 @@
+# Deciphering Personalization: Towards Fine-Grained Explainability in Natural Language for Personalized Image Generation Models
+
+## Introduction
+
+This is the code repository for our submission: Deciphering Personalization: Towards Fine-Grained Explainability in Natural Language for Personalized Image Generation Models
+
+## Requirements
+* torch
+* torchvision
+* transformers
+* diffusers
+* datasets
+* qwen_vl_utils
+* accelerate
+
+## General Usage
+To run the code, you can either use our provided script `run.sh` or execute the file separately:
+
+First use `personalized_ft.py` to finetune a personalized model:
+```
+accelerate launch personalized_ft.py \
+  --pretrained_model_name_or_path=$BASE_MODEL \
+  --train_data_dir=$DATASET \
+  --caption_column="text" \
+  --resolution=512 --center_crop --random_flip \
+  --train_batch_size=1 \
+  --gradient_accumulation_steps=4 \
+  --gradient_checkpointing \
+  --mixed_precision="bf16" \
+  --max_train_steps=1500 \
+  --checkpointing_steps=4000 \
+  --learning_rate=1e-05 \
+  --max_grad_norm=1 \
+  --lr_scheduler="constant" --lr_warmup_steps=0 \
+  --output_dir=$FT_DIR \
+```
+`$DATASET` is the path of fine-tuning data which contains images and the corresponding captions. Make sure it can be loaded by `load_dataset()` function in `datasets`.
+
+Then use `fine_xl.py` to find the explanation for the personalized image generation model in the previous step:
+```
+python3 fine_xl.py \
+  --base_model=$BASE_MODEL \
+  --personalized_model=$FT_DIR\
+  --num_sample=50\
+```
+In `fine_xl.py`, the VLM used for summarizing differences is `Qwen/Qwen2.5-VL-7B-Instruct`. The text and image encoders are `openai/clip-vit-base-patch32`, and we use `nlphuji/mscoco_2014_5k_test_image_text_retrieval` to probe the personalized model's divergence. You can modify these settings in the corresponding code. 
+
+After running the code, the explanation of the personalized model should be printed to the terminal
