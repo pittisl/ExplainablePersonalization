@@ -1,10 +1,23 @@
-# Deciphering Personalization: Towards Fine-Grained Explainability in Natural Language for Personalized Image Generation Models
+# On-device LLM Personalization via Explainable Model Selection
 
 ## Introduction
 
-This is the code repository for our submission: Deciphering Personalization: Towards Fine-Grained Explainability in Natural Language for Personalized Image Generation Models
+This is the code repository for our Mobisys paper: Never Start from Scratch: Expediting On-Device LLM Personalization via Explainable Model Selection. We proposed XPerT (eXplainale Personalized Tuning), a technique to accelerate on-device model personalization via starting from a well-matched model. 
 
-## Requirements
+This repository consists of three parts:
+
+Code for LLM personalization.
+
+An extension of our method to generative models of other modalities, specifically diffusion-based image generation models.
+
+Code for fine-tuning an LLM on Android smartphones, including offline model format conversion and online fine-tuning.
+
+## LLM personalization
+Coming soon
+
+## Selecting personalized diffusion model
+
+### Requirements
 * torch
 * torchvision
 * transformers
@@ -43,6 +56,11 @@ python3 fine_xl.py \
   --personalized_model=$FT_DIR\
   --num_sample=50\
 ```
+
+
 In `fine_xl.py`, the VLM used for summarizing differences is `Qwen/Qwen2.5-VL-7B-Instruct`. The text and image encoders are `openai/clip-vit-base-patch32`, and we use `nlphuji/mscoco_2014_5k_test_image_text_retrieval` to probe the personalized model's divergence. You can modify these settings in the corresponding code. 
 
 After running the code, the explanation of the personalized model should be printed to the terminal
+
+## Implementing LLM fine-tuning on smartphones
+Coming soon
