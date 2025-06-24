@@ -58,7 +58,7 @@ python3 explain_diffusion.py \
 ```
 
 
-In `fine_xl.py`, the VLM used for summarizing differences is `Qwen/Qwen2.5-VL-7B-Instruct`. The text and image encoders are `openai/clip-vit-base-patch32`, and we use `nlphuji/mscoco_2014_5k_test_image_text_retrieval` to probe the personalized model's divergence. You can modify these settings in the corresponding code. 
+In `explain_diffusion.py`, the VLM used for summarizing differences is `Qwen/Qwen2.5-VL-7B-Instruct`. The text and image encoders are `openai/clip-vit-base-patch32`, and we use `nlphuji/mscoco_2014_5k_test_image_text_retrieval` to probe the personalized model's divergence. You can modify these settings in the corresponding code. 
 
 After running the code, the explanation of the personalized model should be printed to the terminal
 
