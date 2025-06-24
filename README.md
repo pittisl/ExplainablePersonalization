@@ -6,11 +6,11 @@ This is the code repository for our Mobisys paper: Never Start from Scratch: Exp
 
 This repository consists of three parts:
 
-Code for LLM personalization.
+- 1 Code for LLM personalization.
 
-An extension of our method to generative models of other modalities, specifically diffusion-based image generation models.
+- 2 An extension of our method to generative models of other modalities, specifically diffusion-based image generation models.
 
-Code for fine-tuning an LLM on Android smartphones, including offline model format conversion and online fine-tuning.
+- 3 Code for fine-tuning an LLM on Android smartphones, including offline model format conversion and online fine-tuning.
 
 ## LLM personalization
 Coming soon
@@ -49,9 +49,9 @@ accelerate launch personalized_ft.py \
 ```
 `$DATASET` is the path of fine-tuning data which contains images and the corresponding captions. Make sure it can be loaded by `load_dataset()` function in `datasets`.
 
-Then use `fine_xl.py` to find the explanation for the personalized image generation model in the previous step:
+Then use `explain_diffusion.py` to find the explanation for the personalized image generation model in the previous step:
 ```
-python3 fine_xl.py \
+python3 explain_diffusion.py \
   --base_model=$BASE_MODEL \
   --personalized_model=$FT_DIR\
   --num_sample=50\
